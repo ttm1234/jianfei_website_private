@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div>
+        <div>{{user.nickname}} 您好，目前您一共有 {{clock_count}} 个打卡记录，加油!!!!</div>
+        <br>
+        <br>
+        {% for c in clocks %}
+        <div>
+            <span>时间是 {{c.ct_str}} -- </span>
+            <span>打卡体重是 {{c.weight_str}} -- </span>
+            <span>备注信息是 {{c.msg}}</span>
+        </div>
+        {% endfor %}
+
+    </div>
+    <br>
+    <br>
+    <div>这里新建打卡记录，暂时没有更改和删除功能</div>
+    <br>
+    <form action="{{ url_for('.post_clock') }}" method="post">
+        <div class="">
+            <input class="input isdiv" type="number" step="0.01" name="weight" required="required" placeholder="体重，单位公斤">
+            <br>
+            <br>
+            <textarea class="input isdiv" cols="" rows="" name="msg" placeholder="">{{default_beizhu}}</textarea>
+            <br>
+            <button>提交打卡</button>
+        </div>
+    </form>
+
+
+    <!--<form action="{{ url_for('.post_clock') }}" method="get">-->
+        <!--<div class="">-->
+            <!--<input class="input isdiv" type="text" name="name" placeholder="name">-->
+            <!--<input class="input isdiv" type="text" name="age" placeholder="age">-->
+            <!--<input class="input isdiv" type="text" name="email" placeholder="email">-->
+
+            <!--<br>-->
+            <!--{% for m in courses %}-->
+            <!--<input type="checkbox" name="course" value="{{m.id}}">{{m.name}}-->
+            <!--<br>-->
+            <!--{% endfor %}-->
+            <!--<br>-->
+            <!--<button>提交</button>-->
+        <!--</div>-->
+    <!--</form>-->
+</body>
+</html>

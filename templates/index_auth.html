@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+    <div>请先登录，咸菜罐头专用</div>
+    <form action="{{ url_for('.post_login') }}" method="post">
+        <div class="">
+            <input class="input isdiv" type="text" name="qq" required="required" placeholder="这里输入群里qq号">
+            <br>
+            <input class="input isdiv" type="text" name="password" required="required" placeholder="这里输入密码">
+            <br>
+            <button>登录</button>
+        </div>
+    </form>
+</body>
+</html>
