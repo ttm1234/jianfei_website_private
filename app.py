@@ -11,6 +11,7 @@ def init_app():
     app = Flask(__name__)
     app.secret_key = config['secret_key']
     app.permanent_session_lifetime = datetime.timedelta(days=200)
+    conn_init()
     return app
 
 
@@ -46,5 +47,4 @@ def zero_division_error(e):
 
 
 if __name__ == '__main__':
-    conn_init()
     app.run(host='0.0.0.0', port=81, debug=True)
