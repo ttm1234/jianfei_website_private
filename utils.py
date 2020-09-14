@@ -1,17 +1,10 @@
 import datetime
 import json
-import random
 import time
 import urllib.parse
 
-import jwt
 from flask import request
 from bson import ObjectId
-from hashlib import md5
-from flask import Response
-
-from config import config
-import random
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -39,21 +32,6 @@ def unix_timestamp():
     return timestamp
 
 
-# def result_handler(data, msg='没有找到', errcode=400):
-#     if data is None:
-#         return {
-#                    'code': errcode,
-#                    'data': data,
-#                    'msg': msg,
-#                }, 200
-#     else:
-#         return {
-#                    'code': 200,
-#                    'data': data,
-#                    'msg': 'ok',
-#                }, 200
-
-
 def gen_id_str(prefix=''):
     r = prefix + str(ObjectId())
     return r
@@ -61,19 +39,6 @@ def gen_id_str(prefix=''):
 
 def get_platform():
     r = request.headers.get('Platform')
-    return r
-
-
-def get_ymds():
-    t0 = datetime.datetime.now()
-    y = t0.strftime('%Y')
-    m = t0.strftime('%Y-%m')
-    d = t0.strftime('%Y-%m-%d')
-    r = {
-        'year': y,
-        'month': m,
-        'day': d,
-    }
     return r
 
 
