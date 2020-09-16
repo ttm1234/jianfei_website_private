@@ -1,5 +1,5 @@
 import datetime
-from flask import Flask, Response, request, render_template, session
+from flask import Flask, Response, request, render_template, session, redirect, url_for
 
 from expection import BaseError
 from extension import conn_init
@@ -31,6 +31,12 @@ def post_login():
     qq, password = data['qq'], data['password']
     r = logic_post_login(qq, password)
     return Response(r) if isinstance(r, str) else r
+
+
+@app.route('/quit', methods=['POST'])
+def post_quit():
+    session.clear()
+    return redirect(url_for('hello'))
 
 
 @app.route('/clock', methods=['POST'])
