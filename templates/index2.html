@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>所有记录</title>
+</head>
+<body>
+
+    {% for cell in all_infos %}
+
+    <div>
+        <div>=============================</div>
+        <div>=============================</div>
+        <div>=============================</div>
+        <div>=============================</div>
+
+        <div>这里是 {{cell.user.nickname}} 的打卡记录，目前一共有 {{cell.clock_count}} 个打卡记录，具体如下</div>
+        <br>
+        <br>
+        {% for c in cell.clocks %}
+        <div>
+            <span>{{cell.user.nickname}} -- </span>
+            <span>时间 {{c.ct_str}} -- </span>
+            <span>体重是 {{c.weight_str}} -- </span>
+            <span>备注是 {{c.msg}}</span>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    {% endfor %}
+
+    <br>
+    <br>
+    <br>
+    <form action="{{ url_for('.post_quit') }}" method="post">
+        <button>点我回到登录页面</button>
+    </form>
+
+</body>
+</html>

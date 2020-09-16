@@ -24,6 +24,9 @@ class User(DocModel):
     def id(self):
         return self._id
 
+    def valid_password(self, password):
+        return self.password == password
+
     @classmethod
     def one_from_qq(cls, qq):
         m = cls.filter_one_by(deleted=False, qq=qq)
@@ -34,6 +37,18 @@ class User(DocModel):
         m = cls.filter_one_by(deleted=False, _id=user_id)
         return m
 
-    def valid_password(self, password):
-        return self.password == password
+    @classmethod
+    def paging(cls, q, limit=-1, offset=0, order_by='ct'):
+        if order_by.startswith('-'):
+            order_by = order_by[1:]
+            fangxiang = -1
+        else:
+            fangxiang = 1
+        ms = cls.filter_by(**q).sort(order_by, fangxiang)
+        count = ms.count()
+        if limit > 0:
+            ms = ms.skip(offset).limit(limit)
+        else:
+            ms = ms.skip(offset)
+        return ms, count
 

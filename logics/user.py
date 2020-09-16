@@ -44,3 +44,28 @@ def logic_post_clock(user_id, data):
     m = Clock.new(user, data)
 
     return redirect(url_for('hello'))
+
+
+def logic_get_all():
+    class UserInfo(object):
+
+        def __init__(self):
+            self.user = None
+            self.clocks = clocks
+            self.clock_count = None
+    # ===========================================
+    users, _ = User.paging({})
+    all_infos = []
+    for user in users:
+        clocks, clock_count = Clock.paging({
+            'user_id': user.id,
+        })
+
+        m = UserInfo()
+        m.user = user
+        m.clocks = clocks
+        m.clock_count = clock_count
+
+        all_infos.append(m)
+
+    return render_template('index2.html', all_infos=all_infos)

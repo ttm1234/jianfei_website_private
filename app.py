@@ -4,7 +4,7 @@ from flask import Flask, Response, request, render_template, session, redirect, 
 from expection import BaseError
 from extension import conn_init
 from config import config
-from logics.user import logic_hello, logic_post_login, logic_post_clock
+from logics.user import logic_hello, logic_post_login, logic_post_clock, logic_get_all
 
 
 def init_app():
@@ -44,6 +44,12 @@ def post_clock():
     data = request.form.to_dict()
     user_id = session['user_id']
     r = logic_post_clock(user_id, data)
+    return Response(r) if isinstance(r, str) else r
+
+
+@app.route('/all')
+def get_all():
+    r = logic_get_all()
     return Response(r) if isinstance(r, str) else r
 
 
